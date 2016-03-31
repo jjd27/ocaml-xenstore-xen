@@ -293,7 +293,7 @@ let dump domid filename =
 		else
 			let module Client = Xs_client_unix.Client(Xs_transport_unix_client) in
 			let client = Client.make () in
-			let mfn = Client.with_xs client (fun h -> Client.read h (Printf.sprintf "/local/domain/%d/store/ring-ref" domid)) in
+			let mfn = Client.immediate client (fun h -> Client.read h (Printf.sprintf "/local/domain/%d/store/ring-ref" domid)) in
 			Printf.fprintf stderr "store mfn = %s\n" mfn;
 			open_ringU domid (Nativeint.of_string mfn) in
 	Printf.fprintf stderr "saving to %s\n" filename;
